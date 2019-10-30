@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FiveGroup.Models.announcement>
+
+@{
+    ViewBag.Title = "公告資訊";
+}
+
+<h1>   公告   </h1>
+<div class="">
+    <ul class="">
+        <li>@Html.ActionLink("回公告列表", "Index", "Announcement")</li>
+        <li>@Html.ActionLink("新增", "Create", "Announcement")</li>
+    </ul>
+</div>
+<table class="table">
+    <tr>
+        <th>公告編號</th>
+        <th>發佈日期</th>
+        <th>內容</th>
+        <th>是否顯示</th>
+        <th>公 告 管 理</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>@item.a_id</td>
+            <td>@item.a_date</td>
+            <td>@item.a_content</td>
+            <td>@item.a_display</td>
+            <td>
+                <a href="@Url.Action("Edit")?a_id=@item.a_id"
+                   class="btn btn-success">編輯</a>
+                <a href="@Url.Action("DELETE")?a_id=@item.a_id"
+                   class="btn btn-danger"
+                   onclick="return confirm('are you sure?  不後悔!!!!!');">刪除</a>
+
+                @*<a href="@Url.Action("DETAIL")?a_id=@item.a_id"
+                   class="btn btn-info">詳細資料</a>*@
+
+
+
+            </td>
+        </tr>
+
+    }
+</table>
+

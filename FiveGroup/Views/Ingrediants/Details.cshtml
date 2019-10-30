@@ -1,0 +1,58 @@
+﻿@model FiveGroup.Models.ingrediant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ingrediant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ing_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing_eng_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing_eng_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing_category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing_category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing_restricted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing_restricted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ing_limitation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ing_limitation)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ing_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

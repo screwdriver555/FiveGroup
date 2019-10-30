@@ -1,0 +1,82 @@
+﻿@*@model IEnumerable<Hospital.Models.hospital>*@
+
+@model FiveGroup.ViewModel.HospitalLocation
+
+@{
+    ViewBag.Title = "醫院管理面板";
+}
+
+<h2>醫院清單</h2>
+
+<div class="row">
+    <div class="col-xs-2">
+        @foreach (var item in Model.Cities)
+        {
+            <p>@Html.ActionLink(item.city_name, "Index", new { cityname = item.c_id })</p>
+        }
+    </div>
+    <div class="col-xs-10">
+        <div class="row">
+            <h3 class="alert alert-success">@ViewBag.cityname</h3>
+
+            <p>
+                @Html.ActionLink("新增", "Create", new { cityname = ViewBag.citynameID }, new { @class = "btn btn-primary" })
+            </p>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        中文名稱
+                    </th>
+                    <th>
+                        英文名稱
+                    </th>
+                    <th>
+                        地址
+                    </th>
+                    <th>
+                        聯絡電話
+                    </th>
+                    <th>
+                        顯示
+                    </th>                    
+                    <th>
+                        地區
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Hospitals)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hos_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hos_eng_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hos_address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hos_phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hos_display)
+                        </td>                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.district.district_name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("編輯", "Edit", "Hospitals",new { id = item.hos_id, cityname = item.c_id }, null)                            
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+

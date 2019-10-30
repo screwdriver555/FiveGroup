@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FiveGroup.Models.ingrediant>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ing_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ing_eng_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ing_category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ing_restricted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ing_limitation)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ing_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ing_eng_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ing_category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ing_restricted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ing_limitation)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ing_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ing_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ing_id })
+        </td>
+    </tr>
+}
+
+</table>

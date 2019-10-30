@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b0e75c69504e4f5f9e6be6321d7ade94" Name="Diagram1">
+        <EntityTypeShape EntityType="Project2Model.administrator" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.announcement" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.bodypart" Width="1.5" PointX="7.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.city" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.department" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.district" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.doctor" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.feedback" Width="1.5" PointX="10" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.feedback_class" Width="1.5" PointX="7.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.hospital" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.ingrediant" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_alarm" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_dur_cont" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_dur_enddate" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_freq_active_pause" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_freq_day" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_freq_hour" Width="1.5" PointX="8.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_freq_time" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.no_freq_week" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.notification" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.schedule" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.symptom" Width="1.5" PointX="10" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project2Model.dep_sym_ref" Width="1.5" PointX="12.25" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="Project2Model.FK__symptom__part_id__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__district__c_id__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__hospital__c_id__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__schedule__dep_id__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__hospital__d_id__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__schedule__doc_id__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__feedback__f_clas__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__schedule__hos_id__2645B050" ManuallyRouted="false" />
+        <AssociationConnector Association="Project2Model.FK__dep_sym_r__sym_i__656C112C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

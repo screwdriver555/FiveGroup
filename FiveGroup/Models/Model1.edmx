@@ -1,0 +1,1063 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Project2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="administrator">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="admin_account" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="admin_pass" Type="char" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="announcement">
+          <Key>
+            <PropertyRef Name="a_id" />
+          </Key>
+          <Property Name="a_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="a_date" Type="datetime" Nullable="false" />
+          <Property Name="a_content" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="a_display" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bodypart">
+          <Key>
+            <PropertyRef Name="part_id" />
+          </Key>
+          <Property Name="part_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="part_name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="int" Nullable="false" />
+          <Property Name="city_name" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'D:\WEBAPP\PROJECT\FIVEGROUP\FIVEGROUP\APP_DATA\PROJECT2.MDF.dbo.dep_sym_ref' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="dep_sym_ref">
+          <Key>
+            <PropertyRef Name="sym_id" />
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="sym_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="dep_id" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="dep_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="dep_name" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="district">
+          <Key>
+            <PropertyRef Name="d_id" />
+          </Key>
+          <Property Name="d_id" Type="int" Nullable="false" />
+          <Property Name="c_id" Type="int" Nullable="false" />
+          <Property Name="district_name" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="doctor">
+          <Key>
+            <PropertyRef Name="doc_id" />
+          </Key>
+          <Property Name="doc_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="doc_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="doc_history" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="doc_display" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="f_sn" />
+          </Key>
+          <Property Name="f_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="f_class" Type="char" MaxLength="5" />
+          <Property Name="f_content" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="f_date" Type="datetime" Nullable="false" />
+          <Property Name="f_checked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="feedback_class">
+          <Key>
+            <PropertyRef Name="f_class" />
+          </Key>
+          <Property Name="f_class" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="class_content" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hospital">
+          <Key>
+            <PropertyRef Name="hos_id" />
+          </Key>
+          <Property Name="hos_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="hos_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="hos_eng_name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="hos_address" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="hos_phone" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="hos_display" Type="bit" Nullable="false" />
+          <Property Name="c_id" Type="int" Nullable="false" />
+          <Property Name="d_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ingrediant">
+          <Key>
+            <PropertyRef Name="ing_id" />
+          </Key>
+          <Property Name="ing_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="ing_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ing_eng_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ing_category" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ing_restricted" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ing_limitation" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="no_alarm">
+          <Key>
+            <PropertyRef Name="alarm_sn" />
+          </Key>
+          <Property Name="alarm_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+          <Property Name="set_time_hour" Type="int" Nullable="false" />
+          <Property Name="set_time_min" Type="int" />
+        </EntityType>
+        <EntityType Name="no_dur_cont">
+          <Key>
+            <PropertyRef Name="dur_sn" />
+          </Key>
+          <Property Name="dur_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_dur_day" Type="int" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_dur_enddate">
+          <Key>
+            <PropertyRef Name="dur_sn" />
+          </Key>
+          <Property Name="dur_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_dur_enddate" Type="datetime" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_active_pause">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_freq_active" Type="int" Nullable="false" />
+          <Property Name="no_freq_pause" Type="int" Nullable="false" />
+          <Property Name="no_cycle_xday" Type="int" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_day">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+          <Property Name="no_xday" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_hour">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_sethour" Type="int" Nullable="false" />
+          <Property Name="no_freq_startime" Type="datetime" Nullable="false" />
+          <Property Name="no_freq_lasttime" Type="datetime" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_time">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_daily_xtime" Type="int" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_week">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_mon" Type="bit" Nullable="false" />
+          <Property Name="no_tue" Type="bit" Nullable="false" />
+          <Property Name="no_wed" Type="bit" Nullable="false" />
+          <Property Name="no_thu" Type="bit" Nullable="false" />
+          <Property Name="no_fri" Type="bit" Nullable="false" />
+          <Property Name="no_sat" Type="bit" Nullable="false" />
+          <Property Name="no_sun" Type="bit" Nullable="false" />
+          <Property Name="no_sn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notification">
+          <Key>
+            <PropertyRef Name="no_sn" />
+          </Key>
+          <Property Name="no_sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_title" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="no_startdate" Type="datetime" Nullable="false" />
+          <Property Name="no_frequency" Type="int" Nullable="false" />
+          <Property Name="no_duration" Type="int" Nullable="false" />
+          <Property Name="no_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="sn" />
+            <PropertyRef Name="doc_id" />
+            <PropertyRef Name="dep_id" />
+            <PropertyRef Name="hos_id" />
+          </Key>
+          <Property Name="sn" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doc_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="dep_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="hos_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="starttime" Type="datetime" Nullable="false" />
+          <Property Name="endtime" Type="datetime" Nullable="false" />
+          <Property Name="s_display" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="symptom">
+          <Key>
+            <PropertyRef Name="sym_id" />
+          </Key>
+          <Property Name="sym_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="sym_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="part_id" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__dep_sym_r__sym_i__656C112C">
+          <End Role="symptom" Type="Self.symptom" Multiplicity="1" />
+          <End Role="dep_sym_ref" Type="Self.dep_sym_ref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="symptom">
+              <PropertyRef Name="sym_id" />
+            </Principal>
+            <Dependent Role="dep_sym_ref">
+              <PropertyRef Name="sym_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__district__c_id__282DF8C2">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="district" Type="Self.district" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="district">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__feedback__f_clas__403A8C7D">
+          <End Role="feedback_class" Type="Self.feedback_class" Multiplicity="0..1" />
+          <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="feedback_class">
+              <PropertyRef Name="f_class" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="f_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hospital__c_id__2739D489">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="hospital" Type="Self.hospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="hospital">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hospital__d_id__29221CFB">
+          <End Role="district" Type="Self.district" Multiplicity="1" />
+          <End Role="hospital" Type="Self.hospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="district">
+              <PropertyRef Name="d_id" />
+            </Principal>
+            <Dependent Role="hospital">
+              <PropertyRef Name="d_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schedule__dep_id__3E52440B">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="dep_id" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="dep_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schedule__doc_id__3C69FB99">
+          <End Role="doctor" Type="Self.doctor" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctor">
+              <PropertyRef Name="doc_id" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="doc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schedule__hos_id__2645B050">
+          <End Role="hospital" Type="Self.hospital" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hospital">
+              <PropertyRef Name="hos_id" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="hos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__symptom__part_id__6477ECF3">
+          <End Role="bodypart" Type="Self.bodypart" Multiplicity="1" />
+          <End Role="symptom" Type="Self.symptom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bodypart">
+              <PropertyRef Name="part_id" />
+            </Principal>
+            <Dependent Role="symptom">
+              <PropertyRef Name="part_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project2ModelStoreContainer">
+          <EntitySet Name="administrator" EntityType="Self.administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="announcement" EntityType="Self.announcement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bodypart" EntityType="Self.bodypart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="city" EntityType="Self.city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="district" EntityType="Self.district" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="doctor" EntityType="Self.doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedback_class" EntityType="Self.feedback_class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hospital" EntityType="Self.hospital" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ingrediant" EntityType="Self.ingrediant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_alarm" EntityType="Self.no_alarm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_dur_cont" EntityType="Self.no_dur_cont" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_dur_enddate" EntityType="Self.no_dur_enddate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_freq_active_pause" EntityType="Self.no_freq_active_pause" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_freq_day" EntityType="Self.no_freq_day" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_freq_hour" EntityType="Self.no_freq_hour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_freq_time" EntityType="Self.no_freq_time" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="no_freq_week" EntityType="Self.no_freq_week" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notification" EntityType="Self.notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="symptom" EntityType="Self.symptom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dep_sym_ref" EntityType="Self.dep_sym_ref" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dep_sym_ref].[sym_id] AS [sym_id], 
+    [dep_sym_ref].[dep_id] AS [dep_id]
+    FROM [dbo].[dep_sym_ref] AS [dep_sym_ref]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__dep_sym_r__sym_i__656C112C" Association="Self.FK__dep_sym_r__sym_i__656C112C">
+            <End Role="symptom" EntitySet="symptom" />
+            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
+          </AssociationSet>
+          <AssociationSet Name="FK__district__c_id__282DF8C2" Association="Self.FK__district__c_id__282DF8C2">
+            <End Role="city" EntitySet="city" />
+            <End Role="district" EntitySet="district" />
+          </AssociationSet>
+          <AssociationSet Name="FK__feedback__f_clas__403A8C7D" Association="Self.FK__feedback__f_clas__403A8C7D">
+            <End Role="feedback_class" EntitySet="feedback_class" />
+            <End Role="feedback" EntitySet="feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hospital__c_id__2739D489" Association="Self.FK__hospital__c_id__2739D489">
+            <End Role="city" EntitySet="city" />
+            <End Role="hospital" EntitySet="hospital" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hospital__d_id__29221CFB" Association="Self.FK__hospital__d_id__29221CFB">
+            <End Role="district" EntitySet="district" />
+            <End Role="hospital" EntitySet="hospital" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schedule__dep_id__3E52440B" Association="Self.FK__schedule__dep_id__3E52440B">
+            <End Role="department" EntitySet="department" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schedule__doc_id__3C69FB99" Association="Self.FK__schedule__doc_id__3C69FB99">
+            <End Role="doctor" EntitySet="doctor" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schedule__hos_id__2645B050" Association="Self.FK__schedule__hos_id__2645B050">
+            <End Role="hospital" EntitySet="hospital" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__symptom__part_id__6477ECF3" Association="Self.FK__symptom__part_id__6477ECF3">
+            <End Role="bodypart" EntitySet="bodypart" />
+            <End Role="symptom" EntitySet="symptom" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Project2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="administrator">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="admin_account" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="admin_pass" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="announcement">
+          <Key>
+            <PropertyRef Name="a_id" />
+          </Key>
+          <Property Name="a_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="a_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="a_content" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="a_display" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bodypart">
+          <Key>
+            <PropertyRef Name="part_id" />
+          </Key>
+          <Property Name="part_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="part_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="symptom" Relationship="Self.FK__symptom__part_id__6477ECF3" FromRole="bodypart" ToRole="symptom" />
+        </EntityType>
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="Int32" Nullable="false" />
+          <Property Name="city_name" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="district" Relationship="Self.FK__district__c_id__282DF8C2" FromRole="city" ToRole="district" />
+          <NavigationProperty Name="hospital" Relationship="Self.FK__hospital__c_id__2739D489" FromRole="city" ToRole="hospital" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="dep_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dep_name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="schedule" Relationship="Self.FK__schedule__dep_id__3E52440B" FromRole="department" ToRole="schedule" />
+        </EntityType>
+        <EntityType Name="district">
+          <Key>
+            <PropertyRef Name="d_id" />
+          </Key>
+          <Property Name="d_id" Type="Int32" Nullable="false" />
+          <Property Name="c_id" Type="Int32" Nullable="false" />
+          <Property Name="district_name" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="city" Relationship="Self.FK__district__c_id__282DF8C2" FromRole="district" ToRole="city" />
+          <NavigationProperty Name="hospital" Relationship="Self.FK__hospital__d_id__29221CFB" FromRole="district" ToRole="hospital" />
+        </EntityType>
+        <EntityType Name="doctor">
+          <Key>
+            <PropertyRef Name="doc_id" />
+          </Key>
+          <Property Name="doc_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="doc_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="doc_history" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="doc_display" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="schedule" Relationship="Self.FK__schedule__doc_id__3C69FB99" FromRole="doctor" ToRole="schedule" />
+        </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="f_sn" />
+          </Key>
+          <Property Name="f_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="f_class" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="f_content" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="f_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="f_checked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="feedback_class" Relationship="Self.FK__feedback__f_clas__403A8C7D" FromRole="feedback" ToRole="feedback_class" />
+        </EntityType>
+        <EntityType Name="feedback_class">
+          <Key>
+            <PropertyRef Name="f_class" />
+          </Key>
+          <Property Name="f_class" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="class_content" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="feedback" Relationship="Self.FK__feedback__f_clas__403A8C7D" FromRole="feedback_class" ToRole="feedback" />
+        </EntityType>
+        <EntityType Name="hospital">
+          <Key>
+            <PropertyRef Name="hos_id" />
+          </Key>
+          <Property Name="hos_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="hos_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hos_eng_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hos_address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hos_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="hos_display" Type="Boolean" Nullable="false" />
+          <Property Name="c_id" Type="Int32" Nullable="false" />
+          <Property Name="d_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="city" Relationship="Self.FK__hospital__c_id__2739D489" FromRole="hospital" ToRole="city" />
+          <NavigationProperty Name="district" Relationship="Self.FK__hospital__d_id__29221CFB" FromRole="hospital" ToRole="district" />
+          <NavigationProperty Name="schedule" Relationship="Self.FK__schedule__hos_id__2645B050" FromRole="hospital" ToRole="schedule" />
+        </EntityType>
+        <EntityType Name="ingrediant">
+          <Key>
+            <PropertyRef Name="ing_id" />
+          </Key>
+          <Property Name="ing_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ing_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ing_eng_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ing_category" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ing_restricted" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ing_limitation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="no_alarm">
+          <Key>
+            <PropertyRef Name="alarm_sn" />
+          </Key>
+          <Property Name="alarm_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+          <Property Name="set_time_hour" Type="Int32" Nullable="false" />
+          <Property Name="set_time_min" Type="Int32" />
+        </EntityType>
+        <EntityType Name="no_dur_cont">
+          <Key>
+            <PropertyRef Name="dur_sn" />
+          </Key>
+          <Property Name="dur_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_dur_day" Type="Int32" Nullable="false" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_dur_enddate">
+          <Key>
+            <PropertyRef Name="dur_sn" />
+          </Key>
+          <Property Name="dur_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_dur_enddate1" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_active_pause">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_freq_active" Type="Int32" Nullable="false" />
+          <Property Name="no_freq_pause" Type="Int32" Nullable="false" />
+          <Property Name="no_cycle_xday" Type="Int32" Nullable="false" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_day">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+          <Property Name="no_xday" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_hour">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_sethour" Type="Int32" Nullable="false" />
+          <Property Name="no_freq_startime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="no_freq_lasttime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_time">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_daily_xtime" Type="Int32" Nullable="false" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_freq_week">
+          <Key>
+            <PropertyRef Name="freq_sn" />
+          </Key>
+          <Property Name="freq_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_mon" Type="Boolean" Nullable="false" />
+          <Property Name="no_tue" Type="Boolean" Nullable="false" />
+          <Property Name="no_wed" Type="Boolean" Nullable="false" />
+          <Property Name="no_thu" Type="Boolean" Nullable="false" />
+          <Property Name="no_fri" Type="Boolean" Nullable="false" />
+          <Property Name="no_sat" Type="Boolean" Nullable="false" />
+          <Property Name="no_sun" Type="Boolean" Nullable="false" />
+          <Property Name="no_sn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notification">
+          <Key>
+            <PropertyRef Name="no_sn" />
+          </Key>
+          <Property Name="no_sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_title" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="no_startdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="no_frequency" Type="Int32" Nullable="false" />
+          <Property Name="no_duration" Type="Int32" Nullable="false" />
+          <Property Name="no_active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="sn" />
+            <PropertyRef Name="doc_id" />
+            <PropertyRef Name="dep_id" />
+            <PropertyRef Name="hos_id" />
+          </Key>
+          <Property Name="sn" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doc_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dep_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="hos_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="starttime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="s_display" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="department" Relationship="Self.FK__schedule__dep_id__3E52440B" FromRole="schedule" ToRole="department" />
+          <NavigationProperty Name="doctor" Relationship="Self.FK__schedule__doc_id__3C69FB99" FromRole="schedule" ToRole="doctor" />
+          <NavigationProperty Name="hospital" Relationship="Self.FK__schedule__hos_id__2645B050" FromRole="schedule" ToRole="hospital" />
+        </EntityType>
+        <EntityType Name="symptom">
+          <Key>
+            <PropertyRef Name="sym_id" />
+          </Key>
+          <Property Name="sym_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="sym_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="part_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="bodypart" Relationship="Self.FK__symptom__part_id__6477ECF3" FromRole="symptom" ToRole="bodypart" />
+          <NavigationProperty Name="dep_sym_ref" Relationship="Self.FK__dep_sym_r__sym_i__656C112C" FromRole="symptom" ToRole="dep_sym_ref" />
+        </EntityType>
+        <EntityType Name="dep_sym_ref">
+          <Key>
+            <PropertyRef Name="sym_id" />
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="sym_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dep_id" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="symptom" Relationship="Self.FK__dep_sym_r__sym_i__656C112C" FromRole="dep_sym_ref" ToRole="symptom" />
+        </EntityType>
+        <Association Name="FK__symptom__part_id__6477ECF3">
+          <End Role="bodypart" Type="Self.bodypart" Multiplicity="1" />
+          <End Role="symptom" Type="Self.symptom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bodypart">
+              <PropertyRef Name="part_id" />
+            </Principal>
+            <Dependent Role="symptom">
+              <PropertyRef Name="part_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__district__c_id__282DF8C2">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="district" Type="Self.district" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="district">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hospital__c_id__2739D489">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="hospital" Type="Self.hospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="hospital">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schedule__dep_id__3E52440B">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="dep_id" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="dep_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hospital__d_id__29221CFB">
+          <End Role="district" Type="Self.district" Multiplicity="1" />
+          <End Role="hospital" Type="Self.hospital" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="district">
+              <PropertyRef Name="d_id" />
+            </Principal>
+            <Dependent Role="hospital">
+              <PropertyRef Name="d_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schedule__doc_id__3C69FB99">
+          <End Role="doctor" Type="Self.doctor" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctor">
+              <PropertyRef Name="doc_id" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="doc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__feedback__f_clas__403A8C7D">
+          <End Role="feedback_class" Type="Self.feedback_class" Multiplicity="0..1" />
+          <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="feedback_class">
+              <PropertyRef Name="f_class" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="f_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schedule__hos_id__2645B050">
+          <End Role="hospital" Type="Self.hospital" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hospital">
+              <PropertyRef Name="hos_id" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="hos_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dep_sym_r__sym_i__656C112C">
+          <End Role="symptom" Type="Self.symptom" Multiplicity="1" />
+          <End Role="dep_sym_ref" Type="Self.dep_sym_ref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="symptom">
+              <PropertyRef Name="sym_id" />
+            </Principal>
+            <Dependent Role="dep_sym_ref">
+              <PropertyRef Name="sym_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="administrator" EntityType="Self.administrator" />
+          <EntitySet Name="announcement" EntityType="Self.announcement" />
+          <EntitySet Name="bodypart" EntityType="Self.bodypart" />
+          <EntitySet Name="city" EntityType="Self.city" />
+          <EntitySet Name="department" EntityType="Self.department" />
+          <EntitySet Name="district" EntityType="Self.district" />
+          <EntitySet Name="doctor" EntityType="Self.doctor" />
+          <EntitySet Name="feedback" EntityType="Self.feedback" />
+          <EntitySet Name="feedback_class" EntityType="Self.feedback_class" />
+          <EntitySet Name="hospital" EntityType="Self.hospital" />
+          <EntitySet Name="ingrediant" EntityType="Self.ingrediant" />
+          <EntitySet Name="no_alarm" EntityType="Self.no_alarm" />
+          <EntitySet Name="no_dur_cont" EntityType="Self.no_dur_cont" />
+          <EntitySet Name="no_dur_enddate" EntityType="Self.no_dur_enddate" />
+          <EntitySet Name="no_freq_active_pause" EntityType="Self.no_freq_active_pause" />
+          <EntitySet Name="no_freq_day" EntityType="Self.no_freq_day" />
+          <EntitySet Name="no_freq_hour" EntityType="Self.no_freq_hour" />
+          <EntitySet Name="no_freq_time" EntityType="Self.no_freq_time" />
+          <EntitySet Name="no_freq_week" EntityType="Self.no_freq_week" />
+          <EntitySet Name="notification" EntityType="Self.notification" />
+          <EntitySet Name="schedule" EntityType="Self.schedule" />
+          <EntitySet Name="symptom" EntityType="Self.symptom" />
+          <EntitySet Name="dep_sym_ref" EntityType="Self.dep_sym_ref" />
+          <AssociationSet Name="FK__symptom__part_id__6477ECF3" Association="Self.FK__symptom__part_id__6477ECF3">
+            <End Role="bodypart" EntitySet="bodypart" />
+            <End Role="symptom" EntitySet="symptom" />
+          </AssociationSet>
+          <AssociationSet Name="FK__district__c_id__282DF8C2" Association="Self.FK__district__c_id__282DF8C2">
+            <End Role="city" EntitySet="city" />
+            <End Role="district" EntitySet="district" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hospital__c_id__2739D489" Association="Self.FK__hospital__c_id__2739D489">
+            <End Role="city" EntitySet="city" />
+            <End Role="hospital" EntitySet="hospital" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schedule__dep_id__3E52440B" Association="Self.FK__schedule__dep_id__3E52440B">
+            <End Role="department" EntitySet="department" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hospital__d_id__29221CFB" Association="Self.FK__hospital__d_id__29221CFB">
+            <End Role="district" EntitySet="district" />
+            <End Role="hospital" EntitySet="hospital" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schedule__doc_id__3C69FB99" Association="Self.FK__schedule__doc_id__3C69FB99">
+            <End Role="doctor" EntitySet="doctor" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__feedback__f_clas__403A8C7D" Association="Self.FK__feedback__f_clas__403A8C7D">
+            <End Role="feedback_class" EntitySet="feedback_class" />
+            <End Role="feedback" EntitySet="feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schedule__hos_id__2645B050" Association="Self.FK__schedule__hos_id__2645B050">
+            <End Role="hospital" EntitySet="hospital" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dep_sym_r__sym_i__656C112C" Association="Self.FK__dep_sym_r__sym_i__656C112C">
+            <End Role="symptom" EntitySet="symptom" />
+            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Project2ModelStoreContainer" CdmEntityContainer="Project2Entities">
+          <EntitySetMapping Name="administrator">
+            <EntityTypeMapping TypeName="Project2Model.administrator">
+              <MappingFragment StoreEntitySet="administrator">
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="admin_account" ColumnName="admin_account" />
+                <ScalarProperty Name="admin_pass" ColumnName="admin_pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="announcement">
+            <EntityTypeMapping TypeName="Project2Model.announcement">
+              <MappingFragment StoreEntitySet="announcement">
+                <ScalarProperty Name="a_id" ColumnName="a_id" />
+                <ScalarProperty Name="a_date" ColumnName="a_date" />
+                <ScalarProperty Name="a_content" ColumnName="a_content" />
+                <ScalarProperty Name="a_display" ColumnName="a_display" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bodypart">
+            <EntityTypeMapping TypeName="Project2Model.bodypart">
+              <MappingFragment StoreEntitySet="bodypart">
+                <ScalarProperty Name="part_id" ColumnName="part_id" />
+                <ScalarProperty Name="part_name" ColumnName="part_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="city">
+            <EntityTypeMapping TypeName="Project2Model.city">
+              <MappingFragment StoreEntitySet="city">
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="department">
+            <EntityTypeMapping TypeName="Project2Model.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+                <ScalarProperty Name="dep_name" ColumnName="dep_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="district">
+            <EntityTypeMapping TypeName="Project2Model.district">
+              <MappingFragment StoreEntitySet="district">
+                <ScalarProperty Name="d_id" ColumnName="d_id" />
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="district_name" ColumnName="district_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="doctor">
+            <EntityTypeMapping TypeName="Project2Model.doctor">
+              <MappingFragment StoreEntitySet="doctor">
+                <ScalarProperty Name="doc_id" ColumnName="doc_id" />
+                <ScalarProperty Name="doc_name" ColumnName="doc_name" />
+                <ScalarProperty Name="doc_history" ColumnName="doc_history" />
+                <ScalarProperty Name="doc_display" ColumnName="doc_display" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feedback">
+            <EntityTypeMapping TypeName="Project2Model.feedback">
+              <MappingFragment StoreEntitySet="feedback">
+                <ScalarProperty Name="f_sn" ColumnName="f_sn" />
+                <ScalarProperty Name="f_class" ColumnName="f_class" />
+                <ScalarProperty Name="f_content" ColumnName="f_content" />
+                <ScalarProperty Name="f_date" ColumnName="f_date" />
+                <ScalarProperty Name="f_checked" ColumnName="f_checked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feedback_class">
+            <EntityTypeMapping TypeName="Project2Model.feedback_class">
+              <MappingFragment StoreEntitySet="feedback_class">
+                <ScalarProperty Name="f_class" ColumnName="f_class" />
+                <ScalarProperty Name="class_content" ColumnName="class_content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hospital">
+            <EntityTypeMapping TypeName="Project2Model.hospital">
+              <MappingFragment StoreEntitySet="hospital">
+                <ScalarProperty Name="hos_id" ColumnName="hos_id" />
+                <ScalarProperty Name="hos_name" ColumnName="hos_name" />
+                <ScalarProperty Name="hos_eng_name" ColumnName="hos_eng_name" />
+                <ScalarProperty Name="hos_address" ColumnName="hos_address" />
+                <ScalarProperty Name="hos_phone" ColumnName="hos_phone" />
+                <ScalarProperty Name="hos_display" ColumnName="hos_display" />
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="d_id" ColumnName="d_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ingrediant">
+            <EntityTypeMapping TypeName="Project2Model.ingrediant">
+              <MappingFragment StoreEntitySet="ingrediant">
+                <ScalarProperty Name="ing_id" ColumnName="ing_id" />
+                <ScalarProperty Name="ing_name" ColumnName="ing_name" />
+                <ScalarProperty Name="ing_eng_name" ColumnName="ing_eng_name" />
+                <ScalarProperty Name="ing_category" ColumnName="ing_category" />
+                <ScalarProperty Name="ing_restricted" ColumnName="ing_restricted" />
+                <ScalarProperty Name="ing_limitation" ColumnName="ing_limitation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_alarm">
+            <EntityTypeMapping TypeName="Project2Model.no_alarm">
+              <MappingFragment StoreEntitySet="no_alarm">
+                <ScalarProperty Name="alarm_sn" ColumnName="alarm_sn" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+                <ScalarProperty Name="set_time_hour" ColumnName="set_time_hour" />
+                <ScalarProperty Name="set_time_min" ColumnName="set_time_min" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_dur_cont">
+            <EntityTypeMapping TypeName="Project2Model.no_dur_cont">
+              <MappingFragment StoreEntitySet="no_dur_cont">
+                <ScalarProperty Name="dur_sn" ColumnName="dur_sn" />
+                <ScalarProperty Name="no_dur_day" ColumnName="no_dur_day" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_dur_enddate">
+            <EntityTypeMapping TypeName="Project2Model.no_dur_enddate">
+              <MappingFragment StoreEntitySet="no_dur_enddate">
+                <ScalarProperty Name="dur_sn" ColumnName="dur_sn" />
+                <ScalarProperty Name="no_dur_enddate1" ColumnName="no_dur_enddate" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_freq_active_pause">
+            <EntityTypeMapping TypeName="Project2Model.no_freq_active_pause">
+              <MappingFragment StoreEntitySet="no_freq_active_pause">
+                <ScalarProperty Name="freq_sn" ColumnName="freq_sn" />
+                <ScalarProperty Name="no_freq_active" ColumnName="no_freq_active" />
+                <ScalarProperty Name="no_freq_pause" ColumnName="no_freq_pause" />
+                <ScalarProperty Name="no_cycle_xday" ColumnName="no_cycle_xday" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_freq_day">
+            <EntityTypeMapping TypeName="Project2Model.no_freq_day">
+              <MappingFragment StoreEntitySet="no_freq_day">
+                <ScalarProperty Name="freq_sn" ColumnName="freq_sn" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+                <ScalarProperty Name="no_xday" ColumnName="no_xday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_freq_hour">
+            <EntityTypeMapping TypeName="Project2Model.no_freq_hour">
+              <MappingFragment StoreEntitySet="no_freq_hour">
+                <ScalarProperty Name="freq_sn" ColumnName="freq_sn" />
+                <ScalarProperty Name="no_sethour" ColumnName="no_sethour" />
+                <ScalarProperty Name="no_freq_startime" ColumnName="no_freq_startime" />
+                <ScalarProperty Name="no_freq_lasttime" ColumnName="no_freq_lasttime" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_freq_time">
+            <EntityTypeMapping TypeName="Project2Model.no_freq_time">
+              <MappingFragment StoreEntitySet="no_freq_time">
+                <ScalarProperty Name="freq_sn" ColumnName="freq_sn" />
+                <ScalarProperty Name="no_daily_xtime" ColumnName="no_daily_xtime" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="no_freq_week">
+            <EntityTypeMapping TypeName="Project2Model.no_freq_week">
+              <MappingFragment StoreEntitySet="no_freq_week">
+                <ScalarProperty Name="freq_sn" ColumnName="freq_sn" />
+                <ScalarProperty Name="no_mon" ColumnName="no_mon" />
+                <ScalarProperty Name="no_tue" ColumnName="no_tue" />
+                <ScalarProperty Name="no_wed" ColumnName="no_wed" />
+                <ScalarProperty Name="no_thu" ColumnName="no_thu" />
+                <ScalarProperty Name="no_fri" ColumnName="no_fri" />
+                <ScalarProperty Name="no_sat" ColumnName="no_sat" />
+                <ScalarProperty Name="no_sun" ColumnName="no_sun" />
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notification">
+            <EntityTypeMapping TypeName="Project2Model.notification">
+              <MappingFragment StoreEntitySet="notification">
+                <ScalarProperty Name="no_sn" ColumnName="no_sn" />
+                <ScalarProperty Name="no_title" ColumnName="no_title" />
+                <ScalarProperty Name="no_startdate" ColumnName="no_startdate" />
+                <ScalarProperty Name="no_frequency" ColumnName="no_frequency" />
+                <ScalarProperty Name="no_duration" ColumnName="no_duration" />
+                <ScalarProperty Name="no_active" ColumnName="no_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schedule">
+            <EntityTypeMapping TypeName="Project2Model.schedule">
+              <MappingFragment StoreEntitySet="schedule">
+                <ScalarProperty Name="sn" ColumnName="sn" />
+                <ScalarProperty Name="doc_id" ColumnName="doc_id" />
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+                <ScalarProperty Name="hos_id" ColumnName="hos_id" />
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
+                <ScalarProperty Name="endtime" ColumnName="endtime" />
+                <ScalarProperty Name="s_display" ColumnName="s_display" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="symptom">
+            <EntityTypeMapping TypeName="Project2Model.symptom">
+              <MappingFragment StoreEntitySet="symptom">
+                <ScalarProperty Name="sym_id" ColumnName="sym_id" />
+                <ScalarProperty Name="sym_name" ColumnName="sym_name" />
+                <ScalarProperty Name="part_id" ColumnName="part_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dep_sym_ref">
+            <EntityTypeMapping TypeName="Project2Model.dep_sym_ref">
+              <MappingFragment StoreEntitySet="dep_sym_ref">
+                <ScalarProperty Name="sym_id" ColumnName="sym_id" />
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
