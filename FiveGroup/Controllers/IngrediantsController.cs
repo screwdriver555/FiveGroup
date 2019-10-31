@@ -38,6 +38,12 @@ namespace FiveGroup.Controllers
         // GET: ingrediants/Create
         public ActionResult Create()
         {
+            var c = db.ingrediant.Count();
+            string id;
+            id = New_Ing_id(c);
+            ViewBag.Ing_id = id;
+
+
             return View();
         }
 
@@ -122,6 +128,30 @@ namespace FiveGroup.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+
+        public string New_Ing_id(int id)
+        {
+            string Ing_id, h;
+            id++;
+            if (id < 10)
+            {
+                h = Convert.ToString(id);/*將id轉換為字串*/
+                Ing_id = "I00" + id;
+            }
+            else if (id >= 10 && id < 100)
+            {
+                h = Convert.ToString(id);
+                Ing_id = "I0" + id;
+            }
+            else
+            {
+                h = Convert.ToString(id);
+                Ing_id = "I" + id;
+            }
+            return Ing_id;
         }
     }
 }

@@ -38,37 +38,37 @@ namespace FiveGroup.Models
 
 
         [DisplayName("成分編號")]
-        [Required(ErrorMessage = "Must put something here")]
+        [Required(ErrorMessage = "此欄位不得為空白")]
         public string ing_id { get; set; }
 
 
         [DisplayName("中文名稱")]
-        [Required(ErrorMessage = "Must put something here")]
-        [StringLength(30, ErrorMessage = "30 Words only here")]
+        [Required(ErrorMessage = "此欄位不得為空白")]
+        [StringLength(30, ErrorMessage = "此欄位不得超過30字")]
         public string ing_name { get; set; }
 
 
         [DisplayName("英文名稱")]
-        [Required(ErrorMessage = "Must put something here")]
-        [StringLength(30, ErrorMessage = "30 Words only here")]
-        //[RegularExpression("[A-Z][a-z]", ErrorMessage ="Only English here")]
+        [Required(ErrorMessage = "此欄位不得為空白")]
+        [StringLength(30, ErrorMessage = "此欄位不得超過30字")]
+        //[RegularExpression("[A-Z][a-z]", ErrorMessage ="僅能輸入英文")]
         public string ing_eng_name { get; set; }
 
 
         [DisplayName("類別")]
-        [Required(ErrorMessage = "Must put something here")]
-        [StringLength(20, ErrorMessage = "20 Words only here")]
+        [Required(ErrorMessage = "此欄位不得為空白")]
+        [StringLength(20, ErrorMessage = "此欄位不得超過20字")]
         public string ing_category { get; set; }
 
 
         [DisplayName("範圍與限制用量")]
-        [Required(ErrorMessage = "Must put something here")]
-        [StringLength(500, ErrorMessage = "500 Words only here")]
+        [Required(ErrorMessage = "此欄位不得為空白")]
+        [StringLength(500, ErrorMessage = "此欄位不得超過500字")]
         public string ing_restricted { get; set; }
 
 
         [DisplayName("使用限制")]
-        [StringLength(100, ErrorMessage = "100 Words only here")]
+        [StringLength(100, ErrorMessage = "此欄位不得超過100字")]
         public string ing_limitation { get; set; }
     }
     public class MetaDatadoctor
