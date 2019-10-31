@@ -16,7 +16,7 @@ namespace FiveGroup.Controllers
             return View(db.doctor.ToList());
         }
 
-        public ActionResult Create(string doc_id)
+        public ActionResult Create()
         {
             /*取資料筆數並呼叫New_Doc_id獲取新id，再透過ViewBag傳至前端*/
             var c = db.doctor.Count();

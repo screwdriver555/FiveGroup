@@ -6,77 +6,96 @@
     ViewBag.Title = "醫院管理面板";
 }
 
-<h2>醫院清單</h2>
+
+<link href="~/Content/HospitalStyle.css" rel="stylesheet" />
+
+<div class="shadow p-3 mb-5 bg-white rounded">
+    <h2 class="text-center"><strong>醫院清單</strong></h2>
+</div>
 
 <div class="row">
-    <div class="col-xs-2">
-        @foreach (var item in Model.Cities)
-        {
-            <p>@Html.ActionLink(item.city_name, "Index", new { cityname = item.c_id })</p>
-        }
+    <div class="col-md-auto">
+        <h5 class="alert alert-success">@ViewBag.cityname</h5>
     </div>
-    <div class="col-xs-10">
-        <div class="row">
-            <h3 class="alert alert-success">@ViewBag.cityname</h3>
-
-            <p>
-                @Html.ActionLink("新增", "Create", new { cityname = ViewBag.citynameID }, new { @class = "btn btn-primary" })
-            </p>
-
-            <table class="table">
-                <tr>
-                    <th>
-                        中文名稱
-                    </th>
-                    <th>
-                        英文名稱
-                    </th>
-                    <th>
-                        地址
-                    </th>
-                    <th>
-                        聯絡電話
-                    </th>
-                    <th>
-                        顯示
-                    </th>                    
-                    <th>
-                        地區
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model.Hospitals)
+    <div class="col-md-auto">
+        <div class="dropdown dropright">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                選擇縣市
+            </button>
+            <div class="dropdown-menu">
+                @foreach (var item in Model.Cities)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hos_name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hos_eng_name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hos_address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hos_phone)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hos_display)
-                        </td>                        
-                        <td>
-                            @Html.DisplayFor(modelItem => item.district.district_name)
-                        </td>
-                        <td>
-                            @Html.ActionLink("編輯", "Edit", "Hospitals",new { id = item.hos_id, cityname = item.c_id }, null)                            
-                        </td>
-                    </tr>
+                    @Html.ActionLink(item.city_name, "Index", new { cityname = item.c_id }, new { @class = "dropdown-item" })
                 }
-            </table>
-
+            </div>
         </div>
     </div>
+    <div class="col-md-auto ml-auto">
+        @Html.ActionLink("新增資料", "Create", new { cityname = ViewBag.citynameID }, new { @class = "btn btn-info" })
+    </div>
 </div>
+
+<table class="table">
+    <tr class="row text-center">
+        <th class="col-2">
+            中文名稱
+        </th>
+        <th class="col-3">
+            英文名稱
+        </th>
+        <th class="col-2">
+            地址
+        </th>
+        <th class="col-2">
+            聯絡電話
+        </th>
+        <th class="col-1">
+            狀態
+        </th>
+        <th class="col-1">
+            地區
+        </th>
+        <th class="col-1"></th>
+    </tr>
+
+    @foreach (var item in Model.Hospitals)
+    {
+        <tr class="row text-center">
+            <td class="col-2">
+                @Html.DisplayFor(modelItem => item.hos_name)
+            </td>
+            <td class="col-3">
+                @Html.DisplayFor(modelItem => item.hos_eng_name)
+            </td>
+            <td class="col-2">
+                @Html.DisplayFor(modelItem => item.hos_address)
+            </td>
+            <td class="col-2">
+                @Html.DisplayFor(modelItem => item.hos_phone)
+            </td>
+            <td class="col-1">
+                @if (item.hos_display == false)
+                {
+                    <span class="badge badge-secondary">隱藏</span>}
+                else
+                {
+                    <span class="badge badge-success">顯示</span>}
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.district.district_name)
+            </td>
+            <td class="col-1">
+                @Html.ActionLink("編輯", "Edit", "Hospitals", new { id = item.hos_id, cityname = item.c_id }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+
 
 
 
