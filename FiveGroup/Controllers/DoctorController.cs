@@ -19,10 +19,10 @@ namespace FiveGroup.Controllers
         public ActionResult Create()
         {
             /*取資料筆數並呼叫New_Doc_id獲取新id，再透過ViewBag傳至前端*/
-            var c = db.doctor.Count();
-            string id;
-            id = New_Doc_id(c);
-            ViewBag.doc_id = id;
+            var id_count = db.doctor.Count();
+            string New_id;
+            New_id = New_Doc_id(id_count);
+            ViewBag.doc_id = New_id;
            /************************************************************/
             return View();
         }
@@ -67,33 +67,34 @@ namespace FiveGroup.Controllers
 
         /*********************************************************/
         /******************此為測試New_Doc_id程式*****************/
-        //public void Cte()
+        //public void test_id()
         //{
-        //    var c = db.doctor.Count();
-        //    String i;
-        //    i=New_Doc_id(c);
-        //    Response.Write(i);
+        //    //var id_count = db.doctor.Count();
+        //    var id_count = 99;
+        //    String New_id;
+        //    New_id = New_Doc_id(id_count);
+        //    Response.Write(New_id);
         //}
         /*********************************************************/
         /********************************************************/
 
         public string New_Doc_id(int id)
         {
-            string Doc_id,h;
+            string Doc_id,id_str;
             id++;
             if (id < 10)
             {
-                h = Convert.ToString(id);/*將id轉換為字串*/
-                Doc_id = "DR00" + id;
+                id_str = Convert.ToString(id);/*將id轉換為字串*/
+                Doc_id = "DR00" + id_str;
             }
             else if (id >= 10 && id < 100)
             {
-                h = Convert.ToString(id);
-                Doc_id = "DR0" + id;
+                id_str = Convert.ToString(id);
+                Doc_id = "DR0" + id_str;
             }
             else {
-                h = Convert.ToString(id);
-                Doc_id = "DR" + id;
+                id_str = Convert.ToString(id);
+                Doc_id = "DR" + id_str;
             }
             return Doc_id;
         }
