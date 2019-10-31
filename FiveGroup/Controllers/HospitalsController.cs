@@ -36,17 +36,17 @@ namespace FiveGroup.Controllers
         // GET: Hospitals/Create
         public ActionResult Create(int? cityname)
         {
+            if (cityname == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             /*取資料筆數並呼叫New_Hos_id獲取新id，再透過ViewBag傳至前端*/
             var c = db.hospital.Count();
             string id;
             id = New_Hos_id(c);
             ViewBag.hos_id = id;
             /************************************************************/
-
-            if (cityname == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             ViewBag.citynameID = cityname;
             ViewBag.cityname = new SelectList(db.city.Where(m => m.c_id == cityname), "c_id", "city_name");
@@ -66,6 +66,11 @@ namespace FiveGroup.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", new { cityname = cityname });
             }
+
+            var c = db.hospital.Count();
+            string id;
+            id = New_Hos_id(c);
+            ViewBag.hos_id = id;
 
             ViewBag.cityname = new SelectList(db.city.Where(m => m.c_id == cityname), "c_id", "city_name");
             ViewBag.d_id = new SelectList(db.district.Where(m => m.c_id == cityname), "d_id", "district_name");
