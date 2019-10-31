@@ -9,17 +9,17 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
+        <tr >
+            <th class="w-auto">
                 @Html.DisplayNameFor(model => model.doc_id)
             </th>
-            <th>
+            <th class="w-auto">
                 @Html.DisplayNameFor(model => model.doc_name)
             </th>
-            <th>
+            <th class="w-50">
                 @Html.DisplayNameFor(model => model.doc_history)
             </th>
-            <th>
+            <th class="w-auto">
                 @Html.DisplayNameFor(model => model.doc_display)
             </th>
             <th> </th>
@@ -48,7 +48,7 @@
                 @*@Html.DisplayFor(modelItem => item.doc_display)*@
             </td>
             <td>
-                @Html.ActionLink("編輯", "Edit", new { id = item.doc_id }, new { @class = "btn btn-info glyphicon glyphicon-pencil" })
+                @Html.ActionLink("編輯", "Edit", new { id = item.doc_id }, new { @class = "btn btn-info" })
                 @*@Html.ActionLink("Details", "Details", new { id=item.doc_id }) |*@
                 @*@Html.ActionLink(" ", "Delete", new { id = item.doc_id }, new { @class = "btn btn-danger glyphicon glyphicon-trash", onclick = "return confirm('您確定要刪除嗎??')" })*@
             </td>
