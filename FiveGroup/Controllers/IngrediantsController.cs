@@ -139,17 +139,17 @@ namespace FiveGroup.Controllers
             if (id < 10)
             {
                 h = Convert.ToString(id);/*將id轉換為字串*/
-                Ing_id = "I00" + id;
+                Ing_id = "I000" + id;
             }
             else if (id >= 10 && id < 100)
             {
                 h = Convert.ToString(id);
-                Ing_id = "I0" + id;
+                Ing_id = "I00" + id;
             }
             else
             {
                 h = Convert.ToString(id);
-                Ing_id = "I" + id;
+                Ing_id = "I0" + id;
             }
             return Ing_id;
         }
