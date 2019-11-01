@@ -3,14 +3,12 @@
 @{
     ViewBag.Title = "公告資訊";
 }
-
+    <div class="">
+        <ul class="">
+            <li>@Html.ActionLink("新增", "Create", "Announcement")</li>
+        </ul>
+    </div>
 <h1>   公告   </h1>
-<div class="">
-    <ul class="">
-        <li>@Html.ActionLink("回公告列表", "Index", "Announcement")</li>
-        <li>@Html.ActionLink("新增", "Create", "Announcement")</li>
-    </ul>
-</div>
 <table class="table">
     <tr>
         <th>公告編號</th>
@@ -27,7 +25,7 @@
             <td>@item.a_id</td>
             <td>@item.a_date</td>
             <td>@item.a_content</td>
-            <td>@item.a_display</td>
+            <td>@Html.DisplayFor(modelItem => item.a_display)</td>
             <td>
                 <a href="@Url.Action("Edit")?a_id=@item.a_id"
                    class="btn btn-success">編輯</a>
