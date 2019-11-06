@@ -1,10 +1,14 @@
-﻿@*@model IEnumerable<Hospital.Models.hospital>*@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
 
 @model FiveGroup.ViewModel.HospitalLocation
 
 @{
     ViewBag.Title = "醫院管理面板";
 }
+
+
 
 
 <link href="~/Content/HospitalStyle.css" rel="stylesheet" />
@@ -25,13 +29,28 @@
             <div class="dropdown-menu">
                 @foreach (var item in Model.Cities)
                 {
-                    @Html.ActionLink(item.city_name, "Index", new { cityname = item.c_id }, new { @class = "dropdown-item" })
+                    @Html.ActionLink(item.city_name, "Index", new { cityId = item.c_id }, new { @class = "dropdown-item" })
                 }
             </div>
         </div>
     </div>
+
+    <div class="col-md-auto">
+        <div class="dropdown dropright">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                選擇地區
+            </button>
+            <div class="dropdown-menu">
+                @foreach (var item in Model.Districts)
+                {
+                    @Html.ActionLink(item.district_name, "Index", new { cityId = item.c_id, districtId = item.d_id }, new { @class = "dropdown-item" })
+                }
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-auto ml-auto">
-        @Html.ActionLink("新增資料", "Create", new { cityname = ViewBag.citynameID }, new { @class = "btn btn-info" })
+        @Html.ActionLink("新增資料", "Create", new { cityId = ViewBag.cityID }, new { @class = "btn btn-info" })
     </div>
 </div>
 
@@ -58,7 +77,7 @@
         <th class="col-1"></th>
     </tr>
 
-    @foreach (var item in Model.Hospitals)
+    @foreach (var item in Model.HospitalPages)
     {
         <tr class="row text-center">
             <td class="col-2">
@@ -85,12 +104,15 @@
                 @Html.DisplayFor(modelItem => item.district.district_name)
             </td>
             <td class="col-1">
-                @Html.ActionLink("編輯", "Edit", "Hospitals", new { id = item.hos_id, cityname = item.c_id }, null)
+                @Html.ActionLink("編輯", "Edit", "Hospitals", new { id = item.hos_id, cityId = item.c_id }, null)
             </td>
         </tr>
     }
 
 </table>
+<div class="text-center">
+    @Html.PagedListPager(Model.HospitalPages, page => Url.Action("Index", new { page }))
+</div>
 
 
 
